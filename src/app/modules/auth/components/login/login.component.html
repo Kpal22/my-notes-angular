@@ -1,0 +1,43 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <h2>Login</h2>
+        </mat-card-title>
+        <mat-card-subtitle>
+            <p  class="f-lg" style="line-height: 20px;">Already signed up, then just login to get
+                started</p>
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content class="pt-2">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline" color="accent">
+                <mat-label>Enter Email</mat-label>
+                <input type="email" matInput formControlName="email" required>
+                <mat-icon *ngIf="!email.touched && email.invalid" matSuffix>email</mat-icon>
+                <mat-icon *ngIf="email.valid" matSuffix>mark_email_read</mat-icon>
+                <mat-icon *ngIf="email.touched && email.invalid" matSuffix>report_gmailerrorred</mat-icon>
+                <mat-error *ngIf="email.touched && email.hasError('required')">Email is required</mat-error>
+                <mat-error *ngIf="email.touched && !email.hasError('required') && email.hasError('invalidEmail')">Email
+                    is inavlid</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" color="accent">
+                <mat-label>Enter Password</mat-label>
+                <input [type]="hidePasswordInput? 'password': 'text'" matInput formControlName="password" required>
+                <mat-icon *ngIf="!password.touched && password.hasError('required')" matSuffix>password</mat-icon>
+                <mat-icon *ngIf="password.touched && password.hasError('required')" matSuffix>report_gmailerrorred
+                </mat-icon>
+                <mat-icon *ngIf="!password.hasError('required')" matSuffix
+                    (click)="hidePasswordInput = !hidePasswordInput" style="cursor: pointer;">{{hidePasswordInput?
+                    'visibility': 'visibility_off'}}
+                </mat-icon>
+                <mat-error *ngIf="password.touched && password.hasError('required')">Password is required</mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="accent" class="btn-shadow px-3 w-100 f-lg"
+                [disabled]="loginForm.invalid || loginForm.disabled">Login</button>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <mat-progress-bar mode="indeterminate" color="accent" style="height: 5px;" *ngIf="loading"></mat-progress-bar>
+    </mat-card-actions>
+</mat-card>

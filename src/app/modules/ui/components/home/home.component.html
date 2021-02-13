@@ -1,0 +1,30 @@
+<div class="container-fluid p-3" style="min-height: 82vh;">
+    <h1 style="font-size: 50px; line-height: 50px;">Welcome to My-Notes</h1>
+    <mat-divider></mat-divider>
+    <p style="line-height: 30px;" class="p-2 f-lg">An online note management tool, create / update /
+        delete notes anytime, anywhere</p>
+    <div class="row">
+        <div class="col-md-4 p-2">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>
+                        <h2>Continue as Guest</h2>
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        <p class="f-lg" style="line-height: 20px;">Wanna have a tour without Sign Up / Login 😉</p>
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <button mat-raised-button color="accent" class="btn-shadow px-3 w-100 f-lg"
+                        routerLink="/dashboard">Continue Tour As Guest</button>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-4 p-2">
+            <app-login></app-login>
+        </div>
+        <div class="col-md-4 p-2">
+            <app-signup></app-signup>
+        </div>
+    </div>
+</div>

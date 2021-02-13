@@ -1,0 +1,53 @@
+<div class="container-fluid" style="min-height: 82vh;">
+    <div class="row p-2">
+
+        <mat-form-field class="mx-2" appearance="standard" color="accent">
+            <mat-label>Search</mat-label>
+            <input matInput type="text" [formControl]="search">
+            <button mat-button matPrefix mat-icon-button>
+                <mat-icon>search</mat-icon>
+            </button>
+            <button mat-button *ngIf="search.value" matSuffix mat-icon-button (click)="search.setValue('')">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field class="mx-2" appearance="standard" color="accent">
+            <mat-label>Sort By</mat-label>
+            <mat-select [formControl]="selected">
+                <mat-option value="create">Create Time</mat-option>
+                <mat-option value="update">Update Time</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="row pt-2">
+        <div class="col-lg-4 col-md-6 pt-4" *ngFor="let note of notes">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{note.title}}</mat-card-title>
+                    <mat-card-subtitle>Created On: {{note.createdAt | date: getDateFormat(note.createdAt)}}
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content>
+                    <p class="p-2">{{note.content}}</p>
+                </mat-card-content>
+                <mat-divider></mat-divider>
+                <mat-card-actions class="mt-2">
+                    <p class="pt-2 pl-2">Last Updated: {{note.updatedAt | date: getDateFormat(note.updatedAt)}}</p>
+                    <span class="full-flex"></span>
+                    <button mat-icon-button matTooltip="Edit Note" matTooltipPosition="above" (click)="editNote(note)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Delete Note" matTooltipPosition="above"
+                        (click)="deleteNote(note)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>
+<button mat-fab color="accent" class="newNote" matTooltip="New Note" matTooltipPosition="above" (click)="newNote()">
+    <mat-icon>add</mat-icon>
+</button>

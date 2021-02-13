@@ -1,0 +1,65 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <h2>Sign Up</h2>
+        </mat-card-title>
+        <mat-card-subtitle>
+            <p class="f-lg" style="line-height: 20px;">Sign up and get access to all features</p>
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content class="pt-2">
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline" color="accent">
+                <mat-label>Enter Name</mat-label>
+                <input type="text" matInput formControlName="name" required>
+                <mat-icon *ngIf="!name.touched || name.valid" matSuffix>person_outline</mat-icon>
+                <mat-icon *ngIf="name.touched && name.invalid" matSuffix>report_gmailerrorred</mat-icon>
+                <mat-error *ngIf="name.touched && name.hasError('required')">Name is required</mat-error>
+                <mat-error *ngIf="name.touched && name.hasError('minlength')">Name must have 3 chars of more</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" color="accent">
+                <mat-label>Enter Email</mat-label>
+                <input type="email" matInput formControlName="email" required>
+                <mat-icon *ngIf="!email.touched && email.invalid" matSuffix>email</mat-icon>
+                <mat-icon *ngIf="email.valid" matSuffix>mark_email_read</mat-icon>
+                <mat-icon *ngIf="email.touched && email.invalid" matSuffix>report_gmailerrorred</mat-icon>
+                <mat-error *ngIf="email.touched && email.hasError('required')">Email is required</mat-error>
+                <mat-error *ngIf="email.touched && !email.hasError('required') && email.hasError('invalidEmail')">Email
+                    is inavlid</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" color="accent">
+                <mat-label>Enter Password</mat-label>
+                <input [type]="hidePasswordInput? 'password': 'text'" matInput formControlName="password" required>
+                <mat-icon *ngIf="!password.touched && password.hasError('required')" matSuffix>password
+                </mat-icon>
+                <mat-icon *ngIf="password.touched && password.hasError('required')" matSuffix>
+                    report_gmailerrorred
+                </mat-icon>
+                <mat-icon *ngIf="!password.hasError('required')" matSuffix
+                    (click)="hidePasswordInput = !hidePasswordInput" style="cursor: pointer;">
+                    {{hidePasswordInput?
+                    'visibility': 'visibility_off'}}
+                </mat-icon>
+                <mat-error *ngIf="password.touched && password.hasError('required')">Password is required
+                </mat-error>
+                <mat-error *ngIf="password.touched && password.hasError('minlength')">Password must have 8
+                    chars of more
+                </mat-error>
+                <mat-error *ngIf="password.touched && password.hasError('invalidPassword')">Password
+                    requires at least 1
+                    capital, 1 small, 1 number, and 1 special character</mat-error>
+                <mat-icon matPrefix style="cursor: pointer;" matTooltip="Generate Strong Password"
+                    matTooltipPosition="above" (click)="generatePassword()">vpn_key</mat-icon>
+                <mat-hint *ngIf="password.touched && !password.hasError('required')" [style.color]="passwordRGB">
+                    Password is {{passwordStrength}}
+                </mat-hint>
+            </mat-form-field>
+            <button mat-raised-button color="accent" class="btn-shadow px-3 w-100 f-lg"
+                [disabled]="signupForm.invalid || signupForm.disabled">Sign Up</button>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <mat-progress-bar mode="indeterminate" color="accent" style="height: 5px;" *ngIf="loading"></mat-progress-bar>
+    </mat-card-actions>
+</mat-card>

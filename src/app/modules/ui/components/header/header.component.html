@@ -1,0 +1,49 @@
+<div class="row" style="margin-bottom: 60px;">
+    <mat-toolbar color="primary">
+        <span style="cursor: pointer" class="pl-2" routerLink="">My-Notes</span>
+        <span class="full-flex"></span>
+        <button mat-icon-button class="mr-3" [matMenuTriggerFor]="menu" *ngIf="!isHome && !showMenu">
+            <mat-icon class="profile-icon">account_circle</mat-icon>
+        </button>
+        <mat-slide-toggle (change)="toggleTheme()" [checked]="theme === 'dark-theme'" *ngIf="!showMenu">
+            <div class="mx-2" style="padding-top: 2px;">
+                <fa-icon [icon]="faAdjust" style="font-size: 20px;"
+                    [flip]="theme === 'dark-theme' ? undefined : 'horizontal'"></fa-icon>
+            </div>
+        </mat-slide-toggle>
+        <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="showMenu">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </mat-toolbar>
+</div>
+<mat-menu #menu="matMenu">
+    <div mat-menu-item *ngIf="showMenu">
+        <mat-slide-toggle (change)="toggleTheme()" [checked]="theme === 'dark-theme'">
+            <div class="ml-4 pt-1">
+                <fa-icon [icon]="faAdjust" style="font-size: 20px;"
+                    [flip]="theme === 'dark-theme' ? undefined : 'horizontal'"></fa-icon>
+            </div>
+        </mat-slide-toggle>
+    </div>
+    <mat-divider *ngIf="showMenu"></mat-divider>
+    <button mat-menu-item routerLink="dashboard" *ngIf="showProfileMenu && isProfile">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+    </button>
+    <button mat-menu-item routerLink="profile" *ngIf="showProfileMenu && !isProfile">
+        <mat-icon>manage_accounts</mat-icon>
+        <span>Profile</span>
+    </button>
+    <button mat-menu-item (click)="openLogoutDialog()" *ngIf="showProfileMenu">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+    </button>
+    <button mat-menu-item *ngIf="!isHome && !showProfileMenu" routerLink="/home">
+        <mat-icon>person_add_alt</mat-icon>
+        <span>Sign Up</span>
+    </button>
+    <button mat-menu-item *ngIf="!isHome && !showProfileMenu" routerLink="/home">
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+    </button>
+</mat-menu>

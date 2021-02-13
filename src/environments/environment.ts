@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  BACKEND_BASE: 'https://kp-my-notes.herokuapp.com',
+  SIGNUP: '/users/signup',
+  LOGIN: '/users/login',
+  LOGOUT: '/users/logout',
+  USERS: '/users',
+  ALL_NOTES: '/notes?sortBy=updatedAt&order=desc',
+  NOTES: '/notes'
 };
 
 /*

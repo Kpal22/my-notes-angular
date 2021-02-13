@@ -1,0 +1,20 @@
+<mat-dialog-content class="m-2">
+    <form [formGroup]="noteForm">
+        <mat-form-field appearance="standard" color="accent">
+            <mat-label>Note Title</mat-label>
+            <input type="text" matInput formControlName="noteTitle" required>
+            <mat-hint>{{noteTitle.value.length}}/25</mat-hint>
+            <mat-error *ngIf="noteTitle.touched && noteTitle.hasError('required')">Title is required</mat-error>
+            <mat-error *ngIf="noteTitle.touched && noteTitle.hasError('maxlength')">Maximum 25 cahrs allwoed</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard" color="accent">
+            <mat-label>Note Content</mat-label>
+            <textarea matInput formControlName="noteContent" rows="5"></textarea>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-divider></mat-divider>
+<mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="getData()" [disabled]="noteForm.invalid || noteForm.pristine" cdkFocusInitial>Save</button>
+    <button mat-button [mat-dialog-close]="false">Cancel</button>
+</mat-dialog-actions>
