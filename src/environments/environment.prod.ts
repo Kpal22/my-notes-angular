@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  BACKEND_BASE: 'http://localhost:3000',
+  BACKEND_BASE: 'https://kp-my-notes.herokuapp.com',
   SIGNUP: '/users/signup',
   LOGIN: '/users/login',
   LOGOUT: '/users/logout',
